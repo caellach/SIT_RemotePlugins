@@ -7,6 +7,10 @@
 * Do the usual build things, nothing complicated.
 * Copy `bin/{BuildConfiguration}/RemotePlugins.dll` to your modded EFT install `EFT/BepInEx/patchers/`
 
+## Installing
+
+* From the zipped release, the client files are in the `BepInEx` directory. Ensure that `RemotePlugins.dll` ends up in `<ModdedEFTFolder/BepInEx/patchers`.
+
 ## Usage
 
 * No other action should be necessary
