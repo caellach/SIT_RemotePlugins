@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "module": "CommonJS",
+        "target": "ES2022",
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "Node10",
+        "esModuleInterop": true,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "baseUrl": ".",
+        "paths": {
+            "@spt-aki/*": ["types/*"]
+        }
+    },
+    "include": ["src/*", "src/**/*"],
+}
