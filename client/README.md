@@ -1,6 +1,6 @@
 # Client
 
-## Building
+## From source
 
 * Requires .NET Framework 4.6.2 SDK
 * Create a `References` directory and copy the BepInEx.dll from your modded EFT install (`EFT/BepInEx/core/BepInEx.dll`) into that folder
@@ -13,7 +13,7 @@
 
 ## Usage
 
-* No other action should be necessary
+* After the first run, a default config file will be generated at `EFT/BepInEx/config/RemotePlugins.cfg`
 
 ## Notes
 
