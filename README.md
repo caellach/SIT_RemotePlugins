@@ -1,8 +1,8 @@
 ## Readme
 
-[Client](./RemotePlugins_client/README.md)
+[Client](./client/README.md)
 
-[Server](./RemotePlugins_server/README.md)
+[Server](./server/README.md)
 
 ## Warning
 
