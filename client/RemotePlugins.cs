@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using BepInEx.Logging;
 using Mono.Cecil;
 
@@ -33,6 +34,14 @@ namespace RemotePlugins
                 return;
             }
 
+            ClientOptions clientOptions = backendApi.GetClientOptions();
+            if (clientOptions == null)
+            {
+                logger.LogFatal("Cannot get client options. Skipping");
+                PrintTimeTaken(startTimeMs);
+                return;
+            }
+
             PluginFileMap pluginFileMap = backendApi.GetFileList();
             if (pluginFileMap == null)
             {
@@ -52,11 +61,44 @@ namespace RemotePlugins
             logger.LogInfo("Bad hash files: " + checkedFilesStatus.BadHashFiles.Count);
             logger.LogInfo("Missing files: " + checkedFilesStatus.MissingFiles.Count);
 
+            
             if (checkedFilesStatus.AllFilesExist && checkedFilesStatus.AllFilesMatch)
             {
-                logger.LogInfo("All files are up to date. Continuing");
-                PrintTimeTaken(startTimeMs);
-                return;
+                if (clientOptions.SyncType == ClientOptions.Synchronization.UpdateOnly)
+                {
+                    logger.LogInfo("All files are up to date. Continuing");
+                    PrintTimeTaken(startTimeMs);
+                    return;
+                }
+                else if (clientOptions.SyncType == ClientOptions.Synchronization.DeleteAndSync)
+                {
+                    // get root directories
+                    List<string> directories = new List<string>();
+                    foreach (PluginFileMap.PluginFile file in pluginFileMap.Files)
+                    {
+                        string firstDirectory = file.Name.Split('/')[0];
+                        if (!directories.Contains(firstDirectory))
+                        {
+                            directories.Add(firstDirectory);
+                        }
+                    }
+
+                    int fileCount = 0;
+                    foreach (string directory in directories)
+                    {
+                        fileCount += Directory.GetFiles(Path.GetFullPath(Path.Combine(bepinexPath, directory)), "*", SearchOption.AllDirectories).Length;
+                    }
+
+                    // taking a shortcut here, if the file count is the same as the checked files count then we are in sync
+                    // otherwise we'll just download the update and delete everything else
+                    if (fileCount == checkedFilesStatus.FilesChecked)
+                    {
+                        logger.LogInfo("All files are up to date. Continuing");
+                        PrintTimeTaken(startTimeMs);
+                        return;
+                    }
+                    logger.LogInfo("Unexpected files found, doing a full reset...");
+                }
             }
 
             logger.LogInfo("Update needed. Processing...");
@@ -95,6 +137,39 @@ namespace RemotePlugins
                 }*/
 
                 // delete the files in the FileMap b/c ZipFile.ExtractToDirectory doesn't overwrite
+                if (clientOptions.SyncType == ClientOptions.Synchronization.UpdateOnly)
+                {
+                    // delete only the files listed in the FileMap
+                    foreach (PluginFileMap.PluginFile file in pluginFileMap.Files)
+                    {
+                        string filePath = Path.GetFullPath(Path.Combine(bepinexPath, file.Name));
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);
+                        }
+                    }
+                }
+                else if (clientOptions.SyncType == ClientOptions.Synchronization.DeleteAndSync)
+                {
+                    // delete all files in the root directories listed in the FileMap
+                    // ensuring that we are in full sync with the server
+                    List<string> directories = new List<string>();
+                    foreach (PluginFileMap.PluginFile file in pluginFileMap.Files)
+                    {
+                        string firstDirectory = file.Name.Split('/')[0];
+                        if (!directories.Contains(firstDirectory))
+                        {
+                            directories.Add(firstDirectory);
+                            // delete this directory
+                            string directoryPath = Path.GetFullPath(Path.Combine(bepinexPath, firstDirectory));
+                            if (Directory.Exists(directoryPath))
+                            {
+                                Directory.Delete(directoryPath, true);
+                            }
+                        }
+                    }
+                }
+
                 foreach (PluginFileMap.PluginFile file in pluginFileMap.Files)
                 {
                     string filePath = Path.GetFullPath(Path.Combine(bepinexPath, file.Name));

@@ -57,8 +57,18 @@ class PluginFileMap {
     Zip: File;
 }
 
+enum Synchronization {
+    UpdateOnly = "UPDATE_ONLY",  // Client should only update the files that are available in the FileMap and leave all other files alone
+    DeleteAndSync = "DELETE_AND_SYNC" // Client should delete all files in the directories which have files in the FileMap
+}
+
+type ClientOptions = {
+    SyncType: Synchronization
+}
+
 type ModConfig = {
     Debug: boolean;
+    ClientOptions: ClientOptions;
 }
 
 class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
@@ -91,6 +101,8 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         this.LogInfo(`BepInEx path: ${this.bepinexFilePath}`);
 
         const httpListenerService = container.resolve<HttpListenerModService>("HttpListenerModService");
+        httpListenerService.registerHttpListener("RemotePluginsClientOptionsHttpListener",
+            this.remotePluginsClientOptionsHttpListener_canHandleOverride, this.remotePluginsClientOptionsHttpListener_handleOverride());
         httpListenerService.registerHttpListener("RemotePluginsFileMapHttpListener",
             this.remotePluginsFileMapHttpListener_canHandleOverride, this.remotePluginsFileMapHttpListener_handleOverride());
         httpListenerService.registerHttpListener("RemotePluginsFileHttpListener",
@@ -98,24 +110,38 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     }
 
     private LoadModConfig() {
+        this.modConfig = this.generateDefaultModConfig();
         try {
-            const configReader = fs.readFileSync(`${this.rootPluginPath}/config/config.json`, "utf8");
-            this.modConfig = JSON.parse(configReader) as ModConfig;
+            if (!fs.existsSync(`${this.rootPluginPath}/config`)) {
+                fs.mkdirSync(`${this.rootPluginPath}/config`);
+            }
+            if (fs.existsSync(`${this.rootPluginPath}/config/config.json`)) {
+                const configReader = fs.readFileSync(`${this.rootPluginPath}/config/config.json`, "utf8");
+                this.modConfig = { ...this.modConfig, ...JSON.parse(configReader) as ModConfig };
+            }
+            // this is to ensure that the config is always up to date
+            fs.writeFileSync(`${this.rootPluginPath}/config/config.json`, JSON.stringify(this.modConfig, null, 4));
         } catch (e) {
-            this.modConfig = {
-                Debug: false
-            }
-
-            if (e.code === "ENOENT") {
-                // file doesn't exist so create it
-                if (!fs.existsSync(`${this.rootPluginPath}/config`)) {
-                    fs.mkdirSync(`${this.rootPluginPath}/config`);
-                }
-                fs.writeFileSync(`${this.rootPluginPath}/config/config.json`, JSON.stringify(this.modConfig, null, 4));
-            } else {
-                this.LogError(e.stack);
-            }
+            this.LogError(e.stack);
         }
+    }
+
+
+    public remotePluginsClientOptionsHttpListener_canHandleOverride(sessionId: string, req: IncomingMessage): boolean {
+        return req.method === "GET" && req.url?.includes(`/${modName}/ClientOptions`);
+    }
+
+    public remotePluginsClientOptionsHttpListener_handleOverride(): (sessionId: string, req: IncomingMessage, resp: ServerResponse) => void {
+        // biome-ignore lint/complexity/noUselessThisAlias: this is overriden by the httpListenerService so we need the alias
+        const _this = this;
+        const responseFunc = async (sessionId: string, req: IncomingMessage, resp: ServerResponse): Promise<void> => {
+            const clientOptionsJson = JSON.stringify(_this.modConfig.ClientOptions);
+            resp.setHeader("Content-Type", "application/json");
+            resp.setHeader("Content-Length", clientOptionsJson.length);
+            resp.writeHead(200, "OK");
+            resp.end(clientOptionsJson);
+        }
+        return responseFunc;
     }
 
 
@@ -203,6 +229,7 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         this.fileWatcher = chokidar.watch([this.bepinexFilePath, this.storagePath], {
             persistent: true,
             ignoreInitial: true,
+            depth: 5,
         });
 
         this.fileWatcher
@@ -301,7 +328,7 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         }
         this.buildsWaiting--;
 
-        this.LogInfo("Rebuilding files");
+        this.LogInfo("Rebuilding files", true);
         this.buildingInProgress = true;
         this.clearCachedData();
         const pluginFileMap = await this.createNewData();
@@ -313,7 +340,7 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         this.cachedPluginFileMap = pluginFileMap;
         this.cachedPluginFileMapJson = JSON.stringify(pluginFileMap);
         this.buildingInProgress = false;
-        this.LogInfo("Rebuilding files done");
+        this.LogInfo("Rebuilding files done", true);
     }
 
     private clearCachedData() {
@@ -362,7 +389,7 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         fs.writeFileSync(`${this.storagePath}bepinex.zip`, zipFileBuffer);
         this.vfs.writeFile(`${this.storagePath}fileMap.json`, JSON.stringify(pluginFileMap), false, true);
         const endTime = new Date().getTime();
-        this.LogInfo(`Rebuilt files in ${endTime - startTime}ms`);
+        this.LogInfo(`Rebuilt files in ${endTime - startTime}ms`, true);
         return pluginFileMap;
     }
 
@@ -424,10 +451,19 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         }) as T;
     }
 
+    private generateDefaultModConfig(): ModConfig {
+        return {
+            Debug: false,
+            ClientOptions: {
+                SyncType: Synchronization.DeleteAndSync
+            }
+        }
+    }
+
 
     // Logging
-    private LogInfo(message: string) {
-        if (this.modConfig.Debug) {
+    private LogInfo(message: string, alwaysLog = false) {
+        if (this.modConfig.Debug || alwaysLog) {
             this.logger.info(message);
         }
     }

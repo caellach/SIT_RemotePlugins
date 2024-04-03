@@ -88,23 +88,14 @@ namespace RemotePlugins
             }
         }
 
+        internal ClientOptions GetClientOptions()
+        {
+            return GetJsonData<ClientOptions>("RemotePlugins/ClientOptions");
+        }
+
         internal PluginFileMap GetFileList()
         {
-            PluginFileMap pluginFileMap = null;
-            try
-            {
-                HttpResponseMessage response = httpClient.GetAsync("RemotePlugins/FileMap").Result;
-                response.EnsureSuccessStatusCode();
-                string responseBody = response.Content.ReadAsStringAsync().Result;
-                // convert the JSON to a PluginFileMap object
-                pluginFileMap = JsonConvert.DeserializeObject<PluginFileMap>(responseBody);
-                logger.LogInfo("Got file map: " + pluginFileMap.Files.Count + " files");
-            }
-            catch (Exception e)
-            {
-                logger.LogFatal("Failed to get file map: " + e.Message);
-            }
-            return pluginFileMap;
+            return GetJsonData<PluginFileMap>("RemotePlugins/FileMap").CleanFileNames();
         }
 
         private static string RemotePluginsFilename = "RemotePlugins.zip";
@@ -148,5 +139,25 @@ namespace RemotePlugins
                 return null;
             }
         }
+    
+        private T GetJsonData<T>(string urlPath) where T: RemoteObject
+        {
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(urlPath).Result;
+                response.EnsureSuccessStatusCode();
+                string responseBody = response.Content.ReadAsStringAsync().Result;
+                // convert the JSON to a ClientOptions object
+                T jsonObject = JsonConvert.DeserializeObject<T>(responseBody);
+                return jsonObject;
+            }
+            catch (Exception e)
+            {
+                logger.LogFatal("Failed to get data from path [" + urlPath + "]: " + e.Message);
+            }
+            return default;
+        }
     }
+
+    internal class RemoteObject { }
 }

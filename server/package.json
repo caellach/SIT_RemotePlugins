@@ -1,13 +1,13 @@
 {
     "name": "RemotePlugins",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "main": "src/mod.js",
     "license": "MIT",
     "author": "caellach",
     "description": "A server mod that allows you to preload remote plugins to the client",
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/caellach/SIT_RemotePlugins.git"
     },
     "akiVersion": "3.8.0",
     "scripts": {
