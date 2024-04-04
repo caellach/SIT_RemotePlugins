@@ -19,11 +19,19 @@ Pop-Location
 # Change to the server directory and build the project
 Push-Location server
 npm run build
-
 # Copy everything except node_modules to the build directory
 Get-ChildItem -Path . -Recurse | Where-Object { $_.FullName -notmatch 'node_modules' } | Copy-Item -Destination { Join-Path ..\build\user\mods\RemotePlugins\ $_.FullName.Substring($pwd.Path.Length) } -Recurse -Force
 Pop-Location
 
-Compress-Archive -Path .\build\* -DestinationPath .\build.zip
+
+# check if the versions match
+$clientVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo(".\build\BepInEx\patchers\RemotePlugins.dll").FileVersion
+$serverVersion = (Get-Content -Path .\build\user\mods\RemotePlugins\package.json | ConvertFrom-Json).version
+if ($clientVersion -ne $serverVersion) {
+    Write-Error "Client and server versions do not match. Client: $clientVersion, Server: $serverVersion"
+}
+
+
+Compress-Archive -Force -Path .\build\* -DestinationPath .\SIT_RemotePlugins_v${serverVersion}.zip
 
 Write-Output "Build complete"
