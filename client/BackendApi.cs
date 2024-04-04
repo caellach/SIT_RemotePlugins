@@ -121,7 +121,7 @@ namespace RemotePlugins
 
                 HttpResponseMessage response = httpClient.GetAsync("RemotePlugins/File").Result;
                 response.EnsureSuccessStatusCode();
-                if (!response.Content.Headers.ContentType.Equals("application/zip"))
+                if (!response.Content.Headers.ContentType.ToString().Equals("application/zip"))
                 {
                     logger.LogFatal("Failed to get file: Content-Type is not application/zip");
                     return null;
