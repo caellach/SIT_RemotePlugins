@@ -99,12 +99,33 @@ namespace RemotePlugins
         }
 
         private static string RemotePluginsFilename = "RemotePlugins.zip";
-        internal PluginUpdateFile GetPluginUpdateFile(string downloadFolder)
+        internal PluginUpdateFile GetPluginUpdateFile(string downloadPath, string expectedHash)
         {
             try
             {
+                string downloadFilePath = Path.GetFullPath(Path.Combine(downloadPath, BackendApi.RemotePluginsFilename));
+                if (File.Exists(downloadFilePath))
+                {
+                    string existingZipHash = PluginFileChecker.GetFileHash(downloadFilePath);
+                    if (existingZipHash == expectedHash)
+                    {
+                        logger.LogInfo("Existing plugin update file found. Skipping download");
+                        return new PluginUpdateFile
+                        {
+                            FileName = BackendApi.RemotePluginsFilename,
+                            FilePath = downloadFilePath,
+                            FileSize = (int)new FileInfo(downloadFilePath).Length
+                        };
+                    }
+                }
+
                 HttpResponseMessage response = httpClient.GetAsync("RemotePlugins/File").Result;
                 response.EnsureSuccessStatusCode();
+                if (!response.Content.Headers.ContentType.Equals("application/zip"))
+                {
+                    logger.LogFatal("Failed to get file: Content-Type is not application/zip");
+                    return null;
+                }
                 // this is the file, store it in the download folder
                 byte[] fileBytes = response.Content.ReadAsByteArrayAsync().Result;
                 if (fileBytes == null || fileBytes.Length <= 100)
@@ -112,12 +133,12 @@ namespace RemotePlugins
                     logger.LogFatal("Failed to get file");
                     return null;
                 }
-                string filePath = Path.GetFullPath(Path.Combine(downloadFolder, RemotePluginsFilename));
+                string filePath = Path.GetFullPath(Path.Combine(downloadPath, RemotePluginsFilename));
 
                 // create the download folder if it doesn't exist
-                if (!Directory.Exists(downloadFolder))
+                if (!Directory.Exists(downloadPath))
                 {
-                    Directory.CreateDirectory(downloadFolder);
+                    Directory.CreateDirectory(downloadPath);
                 }
 
                 if (File.Exists(filePath))
@@ -135,7 +156,7 @@ namespace RemotePlugins
             }
             catch (Exception e)
             {
-                logger.LogFatal("Failed to get file list: " + e.Message);
+                logger.LogFatal("Failed to get file: " + e.Message);
                 return null;
             }
         }

@@ -110,7 +110,7 @@ namespace RemotePlugins
 
             // download the plugin update file
             string downloadPath = Path.GetFullPath(Path.Combine(bepinexPath, "remoteplugins_downloads"));
-            PluginUpdateFile pluginUpdateFile = backendApi.GetPluginUpdateFile(downloadPath);
+            PluginUpdateFile pluginUpdateFile = backendApi.GetPluginUpdateFile(downloadPath, pluginFileMap.Zip.Hash);
             if (pluginUpdateFile == null || pluginUpdateFile.FileSize == 0)
             {
                 logger.LogInfo("No plugin update file found. Skipping");
@@ -119,7 +119,7 @@ namespace RemotePlugins
             }
             else
             {
-                logger.LogInfo("Plugin update file downloaded: " + pluginUpdateFile.FilePath + ":" + pluginUpdateFile.FileSize);
+                logger.LogInfo("Using plugin update file: " + pluginUpdateFile.FilePath + ":" + pluginUpdateFile.FileSize);
             }
 
             // verify the zip file hash
