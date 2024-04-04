@@ -14,6 +14,7 @@
 ## Usage
 
 * After the first run, a default config file will be generated at `EFT/BepInEx/config/RemotePlugins.cfg`
+* If the files retrieved from the server doesn't contain `BepInEx/plugins/StayInTarkov.dll` then this plugin will not modify anything. This is to prevent the server from wiping out folders before the client setup is complete.
 
 ## Notes
 
