@@ -61,7 +61,12 @@ namespace RemotePlugins
             logger.LogInfo("Bad hash files: " + checkedFilesStatus.BadHashFiles.Count);
             logger.LogInfo("Missing files: " + checkedFilesStatus.MissingFiles.Count);
 
-            
+            if (!checkedFilesStatus.ContainsSitDll)
+            {
+                logger.LogError("StayInTarkov.dll not found. Skipping");
+                return;
+            }
+
             if (checkedFilesStatus.AllFilesExist && checkedFilesStatus.AllFilesMatch)
             {
                 if (clientOptions.SyncType == ClientOptions.Synchronization.UpdateOnly)

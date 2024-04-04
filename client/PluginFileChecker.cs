@@ -42,6 +42,23 @@ namespace RemotePlugins
                 }
             }
 
+            private bool isContainsSitDll;
+            private bool containsSitDll;
+            public bool ContainsSitDll
+            {
+                get { return containsSitDll; }
+                set
+                {
+                    if (!isContainsSitDll)
+                    {
+                        containsSitDll = value;
+                        isContainsSitDll = true;
+                    }
+                }
+            }
+
+
+
             private bool isFilesCheckedSet;
             private int filesChecked;
             public int FilesChecked
@@ -124,6 +141,7 @@ namespace RemotePlugins
         {
             bool allFilesExist = false;
             bool allFilesMatch = false;
+            bool containsSitDll = false;
             int filesChecked = 0;
             List<string> badHashFiles = new List<string>();
             List<string> filesNotInWhitelist = new List<string>();
@@ -137,6 +155,10 @@ namespace RemotePlugins
                 {
                     filesNotInWhitelist.Add(file.Name);
                     return;
+                }
+                if (file.Name.Equals("plugins/StayInTarkov.dll"))
+                {
+                    containsSitDll = true;
                 }
                 string filePath = Path.GetFullPath(Path.Combine(bepinexPath, file.Name));
                 if (!File.Exists(filePath))
@@ -172,6 +194,7 @@ namespace RemotePlugins
             {
                 AllFilesExist = allFilesExist,
                 AllFilesMatch = allFilesMatch,
+                ContainsSitDll = containsSitDll,
                 FilesChecked = filesChecked,
                 BadHashFiles = badHashFiles,
                 FilesNotInWhitelist = filesNotInWhitelist,
