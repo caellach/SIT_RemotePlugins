@@ -1,11 +1,5 @@
 # Remote Plugins
 
-## From source
-
-* Copy this folder to the AKI Server into `user/mods/`
-* Ensure that you have NodeJS installed and run `npm install` in this directory to install dependencies.
-  * You could also do this on a different machine and copy the resulting `node_modules` directory to the server into this mod's directory
-
 ## Installing from zip
 
 * From the zipped release, the server files are in the `user` folder. You can extract only this folder in where you have the AKI Server installed and start/restart the server.
