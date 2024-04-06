@@ -103,16 +103,16 @@ namespace RemotePlugins
         {
             try
             {
-                string downloadFilePath = Path.GetFullPath(Path.Combine(downloadPath, BackendApi.RemotePluginsFilename));
+                string downloadFilePath = Path.GetFullPath(Path.Combine(downloadPath, RemotePluginsFilename));
                 if (File.Exists(downloadFilePath))
                 {
-                    string existingZipHash = PluginFileChecker.GetFileHash(downloadFilePath);
+                    string existingZipHash = PluginFileChecker.GenerateFileHash(downloadFilePath);
                     if (existingZipHash == expectedHash)
                     {
                         logger.LogInfo("Existing plugin update file found. Skipping download");
                         return new PluginUpdateFile
                         {
-                            FileName = BackendApi.RemotePluginsFilename,
+                            FileName = RemotePluginsFilename,
                             FilePath = downloadFilePath,
                             FileSize = (int)new FileInfo(downloadFilePath).Length
                         };

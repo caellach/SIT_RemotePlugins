@@ -1,17 +1,12 @@
-﻿using BepInEx.Logging;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RemotePlugins
 {
     internal class RemotePluginsConfig
     {
         public bool Debug { get; set; } = false;
+        public bool KnownFileHashesOnly { get; set; } = true; // Enforce only allowing plugins in the KnownFileHashes.json
 
         internal static RemotePluginsConfig Load()
         {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using BepInEx.Logging;
 using Mono.Cecil;
 
@@ -55,10 +54,18 @@ namespace RemotePlugins
             string bepinexPath = Path.GetFullPath(Path.Combine(baseFilePath, "..")); // we assume that we are in /EFT/BepInEx/Patchers/
             // check the hashes of the files
             logger.LogInfo("Checking files in directory: " + bepinexPath);
-            PluginFileChecker.CheckedFilesStatus checkedFilesStatus = PluginFileChecker.CheckFiles(bepinexPath, pluginFileMap);
+            PluginFileChecker.CheckedFilesStatus checkedFilesStatus = PluginFileChecker.CheckFiles(bepinexPath, pluginFileMap, config.KnownFileHashesOnly);
             logger.LogInfo("Checked files: " + checkedFilesStatus.FilesChecked);
             logger.LogInfo("Skipped files: " + checkedFilesStatus.FilesNotInWhitelist.Count);
-            logger.LogInfo("Bad hash files: " + checkedFilesStatus.BadHashFiles.Count);
+            logger.LogInfo("Bad file map hash files: " + checkedFilesStatus.BadFileMapHashFiles.Count);
+            if (config.KnownFileHashesOnly)
+            {
+                logger.LogInfo("Bad known hash files: " + checkedFilesStatus.BadKnownHashFiles.Count);
+                foreach (string file in checkedFilesStatus.BadKnownHashFiles)
+                {
+                    logger.LogInfo("\t" + file);
+                }
+            }
             logger.LogInfo("Missing files: " + checkedFilesStatus.MissingFiles.Count);
 
             if (!checkedFilesStatus.ContainsSitDll)
@@ -123,7 +130,7 @@ namespace RemotePlugins
             }
 
             // verify the zip file hash
-            string zipHash = PluginFileChecker.GetFileHash(pluginUpdateFile.FilePath);
+            string zipHash = PluginFileChecker.GenerateFileHash(pluginUpdateFile.FilePath);
             logger.LogInfo("Zip file hash: " + zipHash);
             if (zipHash != pluginFileMap.Zip.Hash)
             {
