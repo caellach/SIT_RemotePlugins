@@ -9,6 +9,17 @@ Remove-Item -Recurse -Force -Path .\build -ErrorAction Ignore
 New-Item -ItemType Directory -Path .\build\BepInEx\patchers -Force
 New-Item -ItemType Directory -Path .\build\user\mods\RemotePlugins\node_modules -Force
 
+
+# Change to the GenerateKnownHashes directory and build the project
+Push-Location GenerateKnownHashes
+dotnet restore
+dotnet build -c Release
+$GITHUB_KEY = ${env:GITHUB_KEY}
+Write-Output "GITHUB_KEY: $GITHUB_KEY"
+# Run the project to generate the known hashes: .\bin\Release\GenerateKnownHashes.exe
+.\bin\Release\net6.0\GenerateKnownHashes.exe -key="$GITHUB_KEY" -c ..\client\
+Pop-Location
+
 # Change to the client directory and build the .NET project
 Push-Location client
 dotnet restore

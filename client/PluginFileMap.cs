@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace RemotePlugins
 {
@@ -20,7 +15,7 @@ namespace RemotePlugins
         public string FilesHash { get; set; }
         public PluginFile Zip { get; set; }
 
-        
+
         public PluginFileMap CleanFileNames()
         {
             // prevent remote directory escape

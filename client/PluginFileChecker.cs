@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace RemotePlugins
 {
@@ -74,17 +74,32 @@ namespace RemotePlugins
                 }
             }
 
-            private bool isBadHashFilesSet;
-            private List<string> badHashFiles;
-            public List<string> BadHashFiles
+            private bool isBadFileMapHashFilesSet;
+            private List<string> badFileMapHashFiles;
+            public List<string> BadFileMapHashFiles
             {
-                get { return badHashFiles; }
+                get { return badFileMapHashFiles; }
                 set
                 {
-                    if (!isBadHashFilesSet)
+                    if (!isBadFileMapHashFilesSet)
                     {
-                        badHashFiles = value;
-                        isBadHashFilesSet = true;
+                        badFileMapHashFiles = value;
+                        isBadFileMapHashFilesSet = true;
+                    }
+                }
+            }
+            
+            private bool isBadKnownHashFilesSet;
+            private List<string> badKnownHashFiles;
+            public List<string> BadKnownHashFiles
+            {
+                get { return badKnownHashFiles; }
+                set
+                {
+                    if (!isBadKnownHashFilesSet)
+                    {
+                        badKnownHashFiles = value;
+                        isBadKnownHashFilesSet = true;
                     }
                 }
             }
@@ -100,6 +115,21 @@ namespace RemotePlugins
                     {
                         filesNotInWhitelist = value;
                         isFilesNotInWhitelistSet = true;
+                    }
+                }
+            }
+
+            private bool isFilesWhitelistedInConfigSet;
+            private List<string> filesWhitelistedInConfig;
+            public List<string> FilesWhitelistedInConfig
+            {
+                get { return filesWhitelistedInConfig; }
+                set
+                {
+                    if (!isFilesWhitelistedInConfigSet)
+                    {
+                        filesWhitelistedInConfig = value;
+                        isFilesWhitelistedInConfigSet = true;
                     }
                 }
             }
@@ -133,49 +163,97 @@ namespace RemotePlugins
                     }
                 }
             }
+
+            private bool isQuarantinedFilesSet;
+            private List<string> quarantinedFiles;
+            public List<string> QuarantinedFiles
+            {
+                get { return quarantinedFiles; }
+                set
+                {
+                    if (!isQuarantinedFilesSet)
+                    {
+                        quarantinedFiles = value;
+                        isQuarantinedFilesSet = true;
+                    }
+                }
+            }
         }
 
-        internal static List<string> WhiteListedDirectories { get; } = new List<string> { "config", "plugins" };
+        internal static List<string> WhitelistedDirectories { get; } = new List<string> { "config", "plugins" };
 
-        internal static CheckedFilesStatus CheckFiles(string bepinexPath, PluginFileMap pluginFileMap)
+        internal static CheckedFilesStatus CheckFiles(string bepinexPath, PluginFileMap pluginFileMap, RemotePluginsConfig config)
         {
             bool allFilesExist = false;
             bool allFilesMatch = false;
             bool containsSitDll = false;
             int filesChecked = 0;
-            List<string> badHashFiles = new List<string>();
+            List<string> badFileMapHashFiles = new List<string>();
+            List<string> badKnownHashFiles = new List<string>();
             List<string> filesNotInWhitelist = new List<string>();
+            List<string> filesWhitelistedInConfig = new List<string>();
             List<string> matchingFiles = new List<string>();
             List<string> missingFiles = new List<string>();
+            List<string> quarantinedFiles = new List<string>();
+
+            string quarantinePath = Path.Combine(bepinexPath, "remoteplugins", "quarantine");
 
             pluginFileMap.Files.ForEach(file =>
             {
                 filesChecked++;
-                if (!WhiteListedDirectories.Any(dir => file.Name.StartsWith(dir + "/")))
+                if (!WhitelistedDirectories.Any(dir => file.Name.StartsWith(dir + "/")))
                 {
                     filesNotInWhitelist.Add(file.Name);
                     return;
                 }
-                if (file.Name.Equals("plugins/StayInTarkov.dll"))
+                if (!containsSitDll && file.Name.Equals("plugins/StayInTarkov.dll"))
                 {
                     containsSitDll = true;
                 }
                 string filePath = Path.GetFullPath(Path.Combine(bepinexPath, file.Name));
                 if (!File.Exists(filePath))
                 {
-                    missingFiles.Add(file.Name);
+                    string quarantineFilePath = Path.Combine(quarantinePath, file.Name);
+                    if (config.KnownFileHashesOnly && config.UnknownFileHashAction == UnknownFileHashAction.Quarantine && File.Exists(quarantineFilePath) && Utilities.GenerateHash(quarantineFilePath) == file.Hash)
+                    {
+                        quarantinedFiles.Add(file.Name);
+                    }
+                    else
+                    {
+                        missingFiles.Add(file.Name);
+                    }
                 }
                 else
                 {
                     // file exists
-                    string fileHash = GetFileHash(filePath);
+                    string fileHash = Utilities.GenerateHash(filePath);
                     if (fileHash != file.Hash)
                     {
-                        badHashFiles.Add(file.Name);
+                        badFileMapHashFiles.Add(file.Name);
                     }
                     else
                     {
-                        matchingFiles.Add(file.Name);
+                        if (config.KnownFileHashesOnly && file.Name.ToLower().EndsWith(".dll"))
+                        {
+                            if (IsKnownGoodFileHash(fileHash))
+                            {
+                                matchingFiles.Add(file.Name);
+                            }
+                            else if (config.AllowedFileHashes.Contains(fileHash))
+                            {
+                                matchingFiles.Add(file.Name);
+                                filesWhitelistedInConfig.Add(file.Name);
+                            }
+                            else
+                            {
+                                badKnownHashFiles.Add(file.Name);
+                                Console.WriteLine("Unknown hash: " + file.Name + " hash: " + fileHash);
+                            }
+                        }
+                        else
+                        {
+                            matchingFiles.Add(file.Name);
+                        }
                     }
                 }
             });
@@ -196,21 +274,79 @@ namespace RemotePlugins
                 AllFilesMatch = allFilesMatch,
                 ContainsSitDll = containsSitDll,
                 FilesChecked = filesChecked,
-                BadHashFiles = badHashFiles,
+                BadFileMapHashFiles = badFileMapHashFiles,
+                BadKnownHashFiles = badKnownHashFiles,
                 FilesNotInWhitelist = filesNotInWhitelist,
+                FilesWhitelistedInConfig = filesWhitelistedInConfig,
                 MatchingFiles = matchingFiles,
                 MissingFiles = missingFiles
             };
         }
 
-        internal static string GetFileHash(string filePath)
+
+        internal static Dictionary<string, HashData> knownGoodFileHashes;
+
+        internal static void InitKnownGoodFileHashes(List<string> additionalHashes = null)
         {
-            using (var sha256 = System.Security.Cryptography.SHA256.Create())
+            if (knownGoodFileHashes == null)
             {
-                using (var stream = File.OpenRead(filePath))
+                LoadRemoteKnownGoodFileHashes();
+
+                if (knownGoodFileHashes == null)
                 {
-                    return BitConverter.ToString(sha256.ComputeHash(stream)).Replace("-", string.Empty).ToLower();
+                    Logger.LogInfo("Falling back to local known good file hashes");
+                    var assembly = Assembly.GetExecutingAssembly();
+                    using (Stream stream = assembly.GetManifestResourceStream("RemotePlugins.KnownFileHashes.json"))
+                    {
+                        if (stream == null)
+                        {
+                            knownGoodFileHashes = new Dictionary<string, HashData>();
+                            Logger.LogFatal("Failed to load local known good file hashes");
+                            throw new Exception("Failed to load local known good file hashes");
+                        }
+
+                        using (StreamReader reader = new StreamReader(stream))
+                        {
+                            string json = reader.ReadToEnd();
+                            knownGoodFileHashes = JsonConvert.DeserializeObject<Dictionary<string, HashData>>(json);
+                            Logger.LogInfo("Loaded " + knownGoodFileHashes.Count + " known good file hashes");
+                        }
+                    }
                 }
+            }
+
+            if (additionalHashes != null)
+            {
+                foreach (string hash in additionalHashes)
+                {
+                    if (!knownGoodFileHashes.ContainsKey(hash))
+                    {
+                        knownGoodFileHashes.Add(hash, new HashData { Name = "-" });
+                    }
+                }
+            }
+        }
+        internal static bool IsKnownGoodFileHash(string fileHash)
+        {
+            InitKnownGoodFileHashes();
+            return knownGoodFileHashes.ContainsKey(fileHash);
+        }
+
+        private static void LoadRemoteKnownGoodFileHashes()
+        {
+            // load from github
+            try
+            {
+                using (var client = new System.Net.WebClient())
+                {
+                    // always pull the latest version from master
+                    string json = client.DownloadString("https://raw.githubusercontent.com/caellach/SIT_RemotePlugins/master/client/KnownFileHashes.json");
+                    knownGoodFileHashes = JsonConvert.DeserializeObject<Dictionary<string, HashData>>(json);
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.LogInfo("Failed to load remote known good file hashes: " + e.Message);
             }
         }
     }

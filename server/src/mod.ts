@@ -22,6 +22,7 @@ import { IncomingMessage, ServerResponse } from "http";
 
 const modName = "RemotePlugins";
 const bepinexFilePath = "BepInEx";
+const expectedBepinexDirectories = ["config", "plugins"];
 const storagePath = "files";
 
 
@@ -78,6 +79,7 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
 
     private rootPluginPath: string;
     private storagePath: string;
+    private normalizedStoragePath: string;
     private bepinexFilePath: string;
     private fileWatcher: chokidar.FSWatcher;
     private cachedPluginFileMap: PluginFileMap;
@@ -94,6 +96,7 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         const dirs = this.rootPluginPath.split(path.sep).join("/");
 
         this.storagePath = `${dirs}${storagePath}/`
+        this.normalizedStoragePath = path.normalize(this.storagePath);
         this.bepinexFilePath = `${dirs}${bepinexFilePath}/`;
 
         this.LogInfo(`Root plugin path: ${this.rootPluginPath}`);
@@ -222,8 +225,20 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         if (!this.vfs.exists(this.storagePath)) {
             this.vfs.createDir(this.storagePath);
         }
-        if (!this.vfs.exists(this.bepinexFilePath)) {
-            this.vfs.createDir(this.bepinexFilePath);
+
+        if (expectedBepinexDirectories.length > 0) {
+            for (const dir of expectedBepinexDirectories) {
+                const expectedPath = `${this.bepinexFilePath}${dir}/`;
+                this.logger.info(`Checking for ${expectedPath}`);
+                if (!this.vfs.exists(`${expectedPath}`)) {
+                    this.logger.info(`Creating ${expectedPath}`);
+                    this.vfs.createDir(`${expectedPath}`);
+                }
+            }
+        } else {
+            if (!this.vfs.exists(this.bepinexFilePath)) {
+                this.vfs.createDir(this.bepinexFilePath);
+            }
         }
 
         this.fileWatcher = chokidar.watch([this.bepinexFilePath, this.storagePath], {
@@ -269,45 +284,35 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         } catch (e) { }
 
         // no hash or hash is different
-        this.LogInfo("BepInEx files have changed");
         this.filesChanged = true;
         this.rebuildFiles();
         return;
     }
 
-    private onFileAdd(path: string) {
-        if (path.startsWith(this.storagePath)) return;
+    private onFileAdd(filePath: string) {
+        if (filePath.startsWith(this.normalizedStoragePath)) return;
         this.filesChanged = true;
-        this.LogInfo(`File added: ${path.replace(this.rootPluginPath, "")}`);
+        this.LogInfo(`File added: ${filePath.replace(this.rootPluginPath, "")}`);
         this.rebuildFiles();
     }
 
-    private onFileChange(path: string) {
-        if (!path.startsWith(this.storagePath)) {
+    private onFileChange(filePath: string) {
+        if (!filePath.startsWith(this.normalizedStoragePath)) {
             this.clearCachedData();
         } else if (this.filesChanged) {
             return; // fileMap or zip changed & we are rebuilding
         }
         this.filesChanged = true;
-        this.LogInfo(`File changed: ${path.replace(this.rootPluginPath, "")}`);
+        this.LogInfo(`File changed: ${filePath.replace(this.rootPluginPath, "")}`);
         this.rebuildFiles();
     }
 
-    private onFileUnlink(path: string) {
+    private onFileUnlink(filePath: string) {
         this.filesChanged = true;
-        this.LogInfo(`File deleted: ${path.replace(this.rootPluginPath, "")}`);
+        this.LogInfo(`File deleted: ${filePath.replace(this.rootPluginPath, "")}`);
         this.rebuildFiles();
     }
 
-    /*private rebuildFilesTimeout = null;
-    public rebuildFiles() {
-        if (!this.filesChanged || this.rebuildFilesTimeout) return;
-        // this needs to debounce
-        this.rebuildFilesTimeout = setTimeout(() => {
-            this.rebuildFilesTimeout = null;
-            this.rebuildFilesNow();
-        }, 1000);
-    }*/
     public rebuildFiles = this.debounce(() => {
         const _this = this;
         _this.rebuildFilesNow();
@@ -339,8 +344,11 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         }
         this.cachedPluginFileMap = pluginFileMap;
         this.cachedPluginFileMapJson = JSON.stringify(pluginFileMap);
-        this.buildingInProgress = false;
-        this.LogInfo("Rebuilding files done", true);
+        setTimeout(() => {
+            this.buildingInProgress = false;
+            this.LogInfo("Rebuilding files done", true);
+            this.filesChanged = false;
+        }, 500);
     }
 
     private clearCachedData() {
@@ -370,6 +378,16 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         if (Object.keys(pluginFileMap.Files).length === 0) {
             pluginFileMap.FilesHash = "";
             pluginFileMap.Zip = null;
+
+            try {
+                this.vfs.writeFile(`${this.storagePath}fileMap.json`, JSON.stringify(pluginFileMap), false, true);
+                this.vfs.removeFile(`${this.storagePath}bepinex.zip`);
+            } catch (e) {
+                if (!e.message.includes("ENOENT")) {
+                    this.LogError(e.stack);
+                }
+            }
+
             return pluginFileMap;
         }
 
@@ -405,7 +423,8 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             return true;
         }
         if (currentFileMap.FilesHash !== fileMap.FilesHash) {
-            this.LogInfo(`Files hash changed: ${currentFileMap.FilesHash} != ${fileMap.FilesHash}`);
+            const hash = currentFileMap.FilesHash === null || currentFileMap.FilesHash.length === 0 ? "empty" : currentFileMap.FilesHash;
+            this.LogInfo(`Files hash changed: ${hash} != ${fileMap.FilesHash}`);
             return true;
         }
         return false;
@@ -464,23 +483,23 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
     // Logging
     private LogInfo(message: string, alwaysLog = false) {
         if (this.modConfig.Debug || alwaysLog) {
-            this.logger.info(message);
+            this.logger.info(`[${modName}] I: ${message}`);
         }
     }
 
     private LogWarning(message: string) {
         if (this.modConfig.Debug) {
-            this.logger.warning(message);
+            this.logger.warning(`[${modName}] W: ${message}`);
         }
     }
 
     private LogError(message: string) {
-        this.logger.error(message);
+        this.logger.error(`[${modName}] E: ${message}`);
     }
 
     private LogDebug(message: string) {
         if (this.modConfig.Debug) {
-            this.logger.debug(message);
+            this.logger.debug(`[${modName}] D: ${message}`);
         }
     }
 }
