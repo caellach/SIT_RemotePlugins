@@ -423,7 +423,7 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
             return true;
         }
         if (currentFileMap.FilesHash !== fileMap.FilesHash) {
-            const hash = currentFileMap.FilesHash === null || currentFileMap.FilesHash.length == 0 ? "empty" : currentFileMap.FilesHash;
+            const hash = currentFileMap.FilesHash === null || currentFileMap.FilesHash.length === 0 ? "empty" : currentFileMap.FilesHash;
             this.LogInfo(`Files hash changed: ${hash} != ${fileMap.FilesHash}`);
             return true;
         }
