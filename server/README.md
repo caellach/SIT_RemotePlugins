@@ -25,6 +25,6 @@
 
 * `bool` Debug - Shows more output
 * ClientOptions
-  * `Synchronization` SyncType
+  * `Synchronization` SyncType - enum
     * "DELETE_AND_SYNC" - Default. The client will check that only the files that are listed in the FileMap are available. If there are any mismatches, extra files, or missing files, then that base directory (the immediate directory in `BepInEx`) is deleted and a full update occurs. The client will have exactly the same files as the server and will not retain deleted mods or mods added outside of this mod.
     * "UPDATE_ONLY" - The client should only check the files listed in the FileMap. Only files in the server's `BepInEx` folder will be in the FileMap. All other files will be ignored meaning that the client may have more files than the server and will retain deleted mods.
