@@ -31,7 +31,7 @@ Pop-Location
 Push-Location server
 npm run build
 # Copy everything except node_modules to the build directory
-Get-ChildItem -Path . -Recurse | Where-Object { $_.FullName -notmatch 'node_modules' } | Copy-Item -Destination { Join-Path ..\build\user\mods\RemotePlugins\ $_.FullName.Substring($pwd.Path.Length) } -Recurse -Force
+Get-ChildItem -Path . -Recurse | Where-Object { $_.FullName -notmatch 'node_modules' -and $_.FullName -notmatch 'types' } | Copy-Item -Destination { Join-Path ..\build\user\mods\RemotePlugins\ $_.FullName.Substring($pwd.Path.Length) } -Recurse -Force
 Pop-Location
 
 
