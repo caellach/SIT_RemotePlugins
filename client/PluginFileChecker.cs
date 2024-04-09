@@ -294,7 +294,7 @@ namespace RemotePlugins
 
                 if (knownGoodFileHashes == null)
                 {
-                    Logger.LogInfo("Falling back to local known good file hashes");
+                    //Logger.LogInfo("Falling back to local known good file hashes");
                     var assembly = Assembly.GetExecutingAssembly();
                     using (Stream stream = assembly.GetManifestResourceStream("RemotePlugins.KnownFileHashes.json"))
                     {
@@ -334,8 +334,14 @@ namespace RemotePlugins
 
         private static void LoadRemoteKnownGoodFileHashes()
         {
+            return;
+            // INFO: This is disabled for now. Github uses TLS 1.3 which is not supported by Unity's Mono. Workarounds like setting
+            // ServicePointManager.SecurityProtocol do not work. Microsoft is also limiting official TLS 1.3 support to Windows 11, so we can't rely
+            // on experimental features being enabled for other versions.
+            // https://learn.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-
+
             // load from github
-            try
+            /*try
             {
                 using (var client = new System.Net.WebClient())
                 {
@@ -347,7 +353,7 @@ namespace RemotePlugins
             catch (Exception e)
             {
                 Logger.LogInfo("Failed to load remote known good file hashes: " + e.Message);
-            }
+            }*/
         }
     }
 }
