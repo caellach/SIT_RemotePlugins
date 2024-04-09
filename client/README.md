@@ -20,7 +20,7 @@
 
 * `number` Version - The version of the config file. If the version is different than the current version, then the config will try to update itself. The values that can't be read will be set to their default values.
 * `bool` Debug - Shows more output. Not currently in use.
-* `bool` KnownFilesOnly - Whether to do hash checking against the online hash list (falling back to the built-in hash list) and against the `AllowedFileHashes` array in the config.
+* `bool` KnownFilesOnly - If it should do hash checking against the built-in hash list and the `AllowedFileHashes` array in the config.
 * `array<string>` AllowedFileHashes - A list of file hashes that are allowed to pass the known files checks.
 * `UnknownFileHashAction` UnknownFileHashAction - enum, what should happen when a file hash is unknown.
   * "QUARANTINE" - Moves/Extracts the file to BepInEx/remoteplugins/quarantine/.
