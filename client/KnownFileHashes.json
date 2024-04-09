@@ -2,387 +2,519 @@
   "8e10f73a7ae27360618dc5ffff338ff838f1d13813d7219c5e947af9848c9382": {
     "Name": "AmandsController.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "9643c9ea3942e02bad6aedc6b5e0d361b50b08cc6cc0f59ce30e3be896849b19": {
     "Name": "AmandsGraphics.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3"
     ]
   },
   "14f27f11d97cc884cdf470406a1e93898dc26fa458e7c20b5127a3aefb0605ba": {
     "Name": "AmandsHitmarker.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "3537dc87e2f379615edc7967e117098765df854c339c0af6dc21d2912b0a2e72": {
     "Name": "AmandsSense.dll",
     "ReleaseVersions": [
-      "2.4"
+      "stayintarkov/SIT-Mod-Ports:2.4"
     ]
   },
   "d754e18a86656ed7236ef3339578f0fd677e710a3b8b30c3ff009d0199eadfa7": {
     "Name": "ConfigurationManager.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "03a40a4af091226249c71a17f602c4e3c5ddcee8f37dde28448cf089c3822f92": {
     "Name": "DeadzoneMod.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "df87626839d14bc422016fc03b212b0fd2a867b4321d712180ee75a7079ba1ac": {
     "Name": "DrakiaXYZ-BigBrain.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3"
     ]
   },
   "27d44a3e85bb9ff3659f3e2c467776eb22eec01460fe940e9d94a0bd1001febd": {
     "Name": "DrakiaXYZ-BotDebug.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3"
     ]
   },
   "c080a23aadc4f65911981a98049db6749d06ed084831d2a25dd8d3938196c941": {
     "Name": "DrakiaXYZ-Waypoints.dll",
     "ReleaseVersions": [
-      "2.4"
+      "stayintarkov/SIT-Mod-Ports:2.4"
     ]
   },
   "22f6d2b24226212a9cae30a7dd06a5a31e88362f128a5b9fb975a1c79b6d1ab4": {
     "Name": "dvize.BushNoESP.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "ab99580d32a821697ba908fe9c9c13c3f24407651d0a28b1d336f81f2551c0cd": {
     "Name": "dvize.FUInertia.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "25a0c96e2b0bb4f6f7d1b5765306ceef48c9bb378f0dae116dad85c4388e4eed": {
     "Name": "DynamicExternalResolution.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "73ef4db70c84a066505ef8ecef7e941bd485c9dc2d1ad157b4b8e3e57edd5945": {
     "Name": "FOVFix.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "379fa31a1becd8fdb1b028b24e408edf09500e9d1b9f7d4010e4e5b45ef2f4b9": {
     "Name": "InventoryOrganizingFeatures.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "cbc1b3e347b934dd03e8388a52527779a5daba6706a90cce9a93e978c91ae804": {
     "Name": "LootValue.dll",
     "ReleaseVersions": [
-      "2.4"
+      "stayintarkov/SIT-Mod-Ports:2.4"
     ]
   },
   "e007365dbfc7997b3df775f2ebb38bdd78cca818e42fa6828bac10e044e97f7d": {
     "Name": "MoreCheckmarks.dll",
     "ReleaseVersions": [
-      "2.4"
+      "stayintarkov/SIT-Mod-Ports:2.4"
     ]
   },
   "6bc5b44e514fa74478a66cd9a7f641bbf90a92d7a12cea32c4243ba5e1d07f89": {
     "Name": "RecoilStandalone.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "1f97ca792546037ad6d67eda486568078c7bcedcd2dee0382dae1ca2153ebbbb": {
     "Name": "SAIN.dll",
     "ReleaseVersions": [
-      "2.4"
+      "stayintarkov/SIT-Mod-Ports:2.4"
     ]
   },
   "c2d8cb2d0323ae32c58e42ee1005b28fd65ba743d0a02870cb975215bfe406b5": {
     "Name": "SamSWAT.FOV.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "5bc15b74271dd8db88b11def7e43d7736c4597ad8ede6268166ab7b2c88e353f": {
     "Name": "skwizzy.LootingBots.dll",
     "ReleaseVersions": [
-      "2.4"
+      "stayintarkov/SIT-Mod-Ports:2.4"
     ]
   },
   "c013dd20330ca6ba9f6478f34bf0fc427ee722beb23920da4f5cf94d2ef7d298": {
     "Name": "SPTQuestingBots.dll",
     "ReleaseVersions": [
-      "2.4"
+      "stayintarkov/SIT-Mod-Ports:2.4"
     ]
   },
   "e700acd84640e1c9f4ab1478abb758404defca03fbe5113b8acb95ecd0f40731": {
     "Name": "TechHappy.MinimapSender.dll",
     "ReleaseVersions": [
-      "2.4",
-      "2.3",
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "24cd845d5852c7d6a0c2a27a7b1c56710c871dd6a421c61191287ab0f4bdd96d": {
     "Name": "ThatsLit-Release.dll",
     "ReleaseVersions": [
-      "2.4"
+      "stayintarkov/SIT-Mod-Ports:2.4"
     ]
   },
   "d6bf604b6d29d01128372786ffc395cbbc62e8e7bc00abf3df601a9302a9b85a": {
     "Name": "AmandsSense.dll",
     "ReleaseVersions": [
-      "2.3"
+      "stayintarkov/SIT-Mod-Ports:2.3"
     ]
   },
   "dc9763b0ed87c06368781bae0b1d35d4fd45ee9b23a003b450c1d67da998d902": {
     "Name": "DrakiaXYZ-Waypoints.dll",
     "ReleaseVersions": [
-      "2.3"
+      "stayintarkov/SIT-Mod-Ports:2.3"
     ]
   },
   "2bedf851215a41872b82e99a0ac00921469525fc35276db6d96a5e37e26eeebb": {
     "Name": "LootValue.dll",
     "ReleaseVersions": [
-      "2.3"
+      "stayintarkov/SIT-Mod-Ports:2.3"
     ]
   },
   "88525376842033d0802e071bb6e17bde66aa5d84405512532542b6ca2dc9a330": {
     "Name": "MoreCheckmarks.dll",
     "ReleaseVersions": [
-      "2.3"
+      "stayintarkov/SIT-Mod-Ports:2.3"
     ]
   },
   "d6833775161f6ec30023e30291ce7c146911bdb9b65bcd28c0d22234db2b6a6d": {
     "Name": "SAIN.dll",
     "ReleaseVersions": [
-      "2.3"
+      "stayintarkov/SIT-Mod-Ports:2.3"
     ]
   },
   "efebcb35052bd340f6d929c0e1f8f4bb6ae240f9183621ad4a46744fd6bb35d8": {
     "Name": "skwizzy.LootingBots.dll",
     "ReleaseVersions": [
-      "2.3"
+      "stayintarkov/SIT-Mod-Ports:2.3"
     ]
   },
   "cbbebbae2d7035971cec4c58eadc4f0d36a76964db18b54d40c8312a1bcc9efb": {
     "Name": "SPTQuestingBots.dll",
     "ReleaseVersions": [
-      "2.3"
+      "stayintarkov/SIT-Mod-Ports:2.3"
     ]
   },
   "368f6b49feafb677b44b400229a8bfea1b664cf58726d21da7066c5a0270d474": {
     "Name": "AmandsGraphics.dll",
     "ReleaseVersions": [
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "423a77606c961a7c3ce4ab1a981380e72b7af79057060f76db88b2e969f7d511": {
     "Name": "AmandsSense.dll",
     "ReleaseVersions": [
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "9676a5eb70cb8f9a59e6163dc81f3b8e998aa4eed9dc2c4d5117a893f1b5ea04": {
     "Name": "DrakiaXYZ-BotDebug.dll",
     "ReleaseVersions": [
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "546295fd15baa0dec5832360d5fbbb43db9c846e78b6d44e081bb80314969b72": {
     "Name": "LootValue.dll",
     "ReleaseVersions": [
-      "2.1"
+      "stayintarkov/SIT-Mod-Ports:2.1"
     ]
   },
   "c9209e2bc5426221151e27baf51ad13cfb118938829c7f677fbb5cd6963f7d85": {
     "Name": "MoreCheckmarks.dll",
     "ReleaseVersions": [
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "babc849b2d4f2f5a3c27ac470ecf5262803f50d135caf18ba04e883f9676234d": {
     "Name": "SAIN.dll",
     "ReleaseVersions": [
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "b617615d510c782a42985dd3a4d5c98f8e6b4854a274dab6ca31bb22d6e93d61": {
     "Name": "skwizzy.LootingBots.dll",
     "ReleaseVersions": [
-      "2.1",
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.1",
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "2774cdeb90e4e174d84d4b83452695420b802301d92397554b17715019e844f1": {
     "Name": "LootValue.dll",
     "ReleaseVersions": [
-      "2.0"
+      "stayintarkov/SIT-Mod-Ports:2.0"
     ]
   },
   "14ec664c1f203a5061190909b9534f217da1e6d39540b339e53e02512a1812e7": {
     "Name": "AmandsGraphics-SIT.dll",
     "ReleaseVersions": [
-      "1.4",
-      "1.3"
+      "stayintarkov/SIT-Mod-Ports:1.4",
+      "stayintarkov/SIT-Mod-Ports:1.3"
     ]
   },
   "78572ce8d88dabf82526d092de296c1563ff6645ecead93e883f16a77ddbd518": {
     "Name": "AmandsSense-SIT.dll",
     "ReleaseVersions": [
-      "1.4",
-      "1.3",
-      "1.2"
+      "stayintarkov/SIT-Mod-Ports:1.4",
+      "stayintarkov/SIT-Mod-Ports:1.3",
+      "stayintarkov/SIT-Mod-Ports:1.2"
     ]
   },
   "216b4cb7757bf219c504fbd3bcd95645f924d92f8b747e2c17730c6f8c8bb9f8": {
     "Name": "BigBrain-SIT.dll",
     "ReleaseVersions": [
-      "1.4",
-      "1.3",
-      "1.2",
-      "1.1",
-      "1.0"
+      "stayintarkov/SIT-Mod-Ports:1.4",
+      "stayintarkov/SIT-Mod-Ports:1.3",
+      "stayintarkov/SIT-Mod-Ports:1.2",
+      "stayintarkov/SIT-Mod-Ports:1.1",
+      "stayintarkov/SIT-Mod-Ports:1.0"
     ]
   },
   "62e61ce23961dd6c92f66e83d53963019b9caa194d99ba6f9433ddfdbccb5ae6": {
     "Name": "GrassCutter-SIT.dll",
     "ReleaseVersions": [
-      "1.4"
+      "stayintarkov/SIT-Mod-Ports:1.4"
     ]
   },
   "1ff0722eb301ac468d8a64d71cc619fe6ccadcc72f59b7b9d26aae2e26577a4a": {
     "Name": "HitMarkers-SIT.dll",
     "ReleaseVersions": [
-      "1.4",
-      "1.3",
-      "1.2"
+      "stayintarkov/SIT-Mod-Ports:1.4",
+      "stayintarkov/SIT-Mod-Ports:1.3",
+      "stayintarkov/SIT-Mod-Ports:1.2"
     ]
   },
   "b6162b99e272ca97e9dfc793ece25e774329841659179f2ad2ea8a5ab73dcd7f": {
     "Name": "MoreCheckmarks.dll",
     "ReleaseVersions": [
-      "1.4",
-      "1.3",
-      "1.2",
-      "1.1"
+      "stayintarkov/SIT-Mod-Ports:1.4",
+      "stayintarkov/SIT-Mod-Ports:1.3",
+      "stayintarkov/SIT-Mod-Ports:1.2",
+      "stayintarkov/SIT-Mod-Ports:1.1"
     ]
   },
   "e1e27af7b07eeedf5ce71a9255f0422816a6fc5849a483c6714e1b472044fa9d": {
     "Name": "Newtonsoft.Json.dll",
     "ReleaseVersions": [
-      "1.4",
-      "1.3",
-      "1.2",
-      "1.1",
-      "1.0"
+      "stayintarkov/SIT-Mod-Ports:1.4",
+      "stayintarkov/SIT-Mod-Ports:1.3",
+      "stayintarkov/SIT-Mod-Ports:1.2",
+      "stayintarkov/SIT-Mod-Ports:1.1",
+      "stayintarkov/SIT-Mod-Ports:1.0"
     ]
   },
   "fbc4802e5ccd5b1470849a48acc71f908dfb3dbca125cc38a67107a53464f986": {
     "Name": "NoBushESP-SIT.dll",
     "ReleaseVersions": [
-      "1.4",
-      "1.3",
-      "1.2",
-      "1.1",
-      "1.0"
+      "stayintarkov/SIT-Mod-Ports:1.4",
+      "stayintarkov/SIT-Mod-Ports:1.3",
+      "stayintarkov/SIT-Mod-Ports:1.2",
+      "stayintarkov/SIT-Mod-Ports:1.1",
+      "stayintarkov/SIT-Mod-Ports:1.0"
     ]
   },
   "595578d053ee5420c924ee6ad21984a77250047161f06c88c6706e046158aa03": {
     "Name": "SAIN-SIT.dll",
     "ReleaseVersions": [
-      "1.4",
-      "1.3",
-      "1.2",
-      "1.1"
+      "stayintarkov/SIT-Mod-Ports:1.4",
+      "stayintarkov/SIT-Mod-Ports:1.3",
+      "stayintarkov/SIT-Mod-Ports:1.2",
+      "stayintarkov/SIT-Mod-Ports:1.1"
     ]
   },
   "e5fe4d62580bd79abf2a93896a6f38afa48652fcf7fff430ca8a98fcb2ea68cd": {
     "Name": "skwizzy.LootingBots.dll",
     "ReleaseVersions": [
-      "1.4",
-      "1.3",
-      "1.2",
-      "1.1"
+      "stayintarkov/SIT-Mod-Ports:1.4",
+      "stayintarkov/SIT-Mod-Ports:1.3",
+      "stayintarkov/SIT-Mod-Ports:1.2",
+      "stayintarkov/SIT-Mod-Ports:1.1"
     ]
   },
   "a94dc67b47806612e97dbe2b0d9e7882511b77d61f8baba7b41e1d050c60dc91": {
     "Name": "TechHappy.MinimapSender-SIT.dll",
     "ReleaseVersions": [
-      "1.4"
+      "stayintarkov/SIT-Mod-Ports:1.4"
     ]
   },
   "928131da807c25675e14d9e9d56526da681e39ac2a4a8fe002885172495f1eff": {
     "Name": "Waypoints-SIT.dll",
     "ReleaseVersions": [
-      "1.4",
-      "1.3",
-      "1.2",
-      "1.1"
+      "stayintarkov/SIT-Mod-Ports:1.4",
+      "stayintarkov/SIT-Mod-Ports:1.3",
+      "stayintarkov/SIT-Mod-Ports:1.2",
+      "stayintarkov/SIT-Mod-Ports:1.1"
     ]
   },
   "67bd3fdc1f35771ff7d4c24de65143bb3b3986f579547b1f63e0b6cd7dec5a08": {
     "Name": "SAIN-SIT.dll",
     "ReleaseVersions": [
-      "1.0"
+      "stayintarkov/SIT-Mod-Ports:1.0"
     ]
   },
   "f061214aaf477bb0189096140d851e867ce7e2d48f6fb4fa3d2545e46a2322fd": {
     "Name": "Waypoints-SIT.dll",
     "ReleaseVersions": [
-      "1.0"
+      "stayintarkov/SIT-Mod-Ports:1.0"
+    ]
+  },
+  "ea79c222aaf7b23c27821f8f6d4274eafdf247c16315e7ca790bbd45fece7961": {
+    "Name": "Assembly-CSharp.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8827.21733",
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8827.30098",
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8824.27027"
+    ]
+  },
+  "925a264fe82726e1043c92df1b40a66ad4eaee0fe9898d1267ce25860aca971d": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8827.21733"
+    ]
+  },
+  "1f5912880f3c081981bf89c79ce13e52098ecaf82c56b4c8857b8299e5c1ef16": {
+    "Name": "Assembly-CSharp.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.9.8766.40295",
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.9.8742.42820",
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.9.8742.36855"
+    ]
+  },
+  "72fb032884fe28542749db0323431ef8f83a797ef7dd52fc1f0c45b9d36795d7": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.9.8766.40295"
+    ]
+  },
+  "3734d5793785f3e34f62dd10429f14674533bc347447e609fa346d6335f30e26": {
+    "Name": "Unity.TextMeshPro.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.9.8766.40295"
+    ]
+  },
+  "deb3e6640b4cbdf30a9278a97aa48d810bd4d948ea19581e522a23a44a1f1ff2": {
+    "Name": "Assembly-CSharp.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.9.8735.34855"
+    ]
+  },
+  "90e45b9c73ae41457a66be0a15f2eeb4500d3ae6de4a0b74c0c87f27e24ada86": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.9.8735.34855"
+    ]
+  },
+  "634790d1e032d70bcdb7b28fb641b584d16322c2334b417e060a2015cdb27476": {
+    "Name": "Assembly-CSharp.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8854.18454",
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8853.41460",
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8853.28843"
+    ]
+  },
+  "12a03419fe4649cc68713d8368cf6c1f33c649a160df9feb0a85e8a037600c89": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8854.18454"
+    ]
+  },
+  "858d2b71dc0cb6ee9550c4c57a6e3e5cb6b1dc460d6971871be043076b398c2f": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8853.41460"
+    ]
+  },
+  "52a04dc77c5d51d5a37223009aeb9e028276f77337aa8971e84b8bf010bf06de": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8853.28843"
+    ]
+  },
+  "57441aabd29cd4d025eaf3091a9e311213a4410ee4e813542defd87ab2999259": {
+    "Name": "Assembly-CSharp.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8839.30073"
+    ]
+  },
+  "f10d2cf06daf631a17bb911373c03349d21391cfe792af291f132362c2411656": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8839.30073"
+    ]
+  },
+  "b398aaf73d9710f2ebf3ea6c4e3991752f017116d2e07f12ba1b6f5e996d43b2": {
+    "Name": "Assembly-CSharp.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8832.16985"
+    ]
+  },
+  "f89becafc7149b7bdd83fb8d9fb3c0914d0e98366b25fbee53014f773227576a": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8832.16985"
+    ]
+  },
+  "bb1c92352fb5c5c78b8fc9a4245414fdfb173feb4671613674f6c1f5844b96fb": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8827.30098"
+    ]
+  },
+  "c206272b295cf6faa7e138454d518569fdcb618212d3b28f1e703e9098173a44": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8824.27027"
+    ]
+  },
+  "63e865aca0ee7ca53013bc6700117a273d5036168f0e3324cbf5567124b2bcce": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.9.8742.42820"
+    ]
+  },
+  "edd8799f09859a5cad51bef6f87d6555492ce427d18e74576d6847188b538e61": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.9.8742.36855"
+    ]
+  },
+  "0f682aa18b4b278251428b8f0ad7dc96af1c8e072225114d262c37ece3c402e5": {
+    "Name": "Assembly-CSharp.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-2023-11-20-15-25"
+    ]
+  },
+  "ef1f165c70df8f373b8e51bb763db60708aa8e3741c5daae8718672c798b34aa": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-2023-11-20-15-25"
     ]
   }
 }

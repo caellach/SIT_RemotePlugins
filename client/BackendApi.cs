@@ -1,5 +1,4 @@
-﻿using BepInEx.Logging;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -8,7 +7,6 @@ namespace RemotePlugins
 {
     internal class BackendApi
     {
-        private ManualLogSource logger = Logger.CreateLogSource("RemotePlugins_BackendApi");
         private HttpClient httpClient = new HttpClient();
 
         private BackendUrlObj backendUrlObj;
@@ -33,7 +31,7 @@ namespace RemotePlugins
             string[] args = Environment.GetCommandLineArgs();
             if (args == null)
             {
-                logger.LogFatal("No command line arguments found");
+                Logger.LogFatal("No command line arguments found");
                 return;
             }
 
@@ -43,7 +41,7 @@ namespace RemotePlugins
                 {
                     string json = arg.Replace("-config=", string.Empty);
                     backendUrlObj = JsonConvert.DeserializeObject<BackendUrlObj>(json);
-                    logger.LogInfo("BackendUrl: " + backendUrlObj.BackendUrl);
+                    Logger.LogInfo("BackendUrl: " + backendUrlObj.BackendUrl);
                 }
             }
         }
@@ -52,7 +50,7 @@ namespace RemotePlugins
         {
             if (backendUrlObj == null || string.IsNullOrWhiteSpace(backendUrlObj.BackendUrl))
             {
-                logger.LogFatal("BackendUrl is not set");
+                Logger.LogFatal("BackendUrl is not set");
                 return;
             }
 
@@ -75,7 +73,7 @@ namespace RemotePlugins
 
                 if (responseBody != "\"pong!\"")
                 {
-                    logger.LogFatal("Backend responded different than expected: " + responseBody);
+                    Logger.LogFatal("Backend responded different than expected: " + responseBody);
                     return;
                 }
 
@@ -83,7 +81,7 @@ namespace RemotePlugins
             }
             catch (Exception e)
             {
-                logger.LogFatal("Failed to connect to backend: " + e.Message);
+                Logger.LogFatal("Failed to connect to backend: " + e.Message);
                 return;
             }
         }
@@ -106,10 +104,10 @@ namespace RemotePlugins
                 string downloadFilePath = Path.GetFullPath(Path.Combine(downloadPath, RemotePluginsFilename));
                 if (File.Exists(downloadFilePath))
                 {
-                    string existingZipHash = PluginFileChecker.GenerateFileHash(downloadFilePath);
+                    string existingZipHash = Utilities.GenerateHash(downloadFilePath);
                     if (existingZipHash == expectedHash)
                     {
-                        logger.LogInfo("Existing plugin update file found. Skipping download");
+                        Logger.LogInfo("Existing plugin update file found. Skipping download");
                         return new PluginUpdateFile
                         {
                             FileName = RemotePluginsFilename,
@@ -117,20 +115,22 @@ namespace RemotePlugins
                             FileSize = (int)new FileInfo(downloadFilePath).Length
                         };
                     }
+
+                    File.Delete(downloadFilePath);
                 }
 
                 HttpResponseMessage response = httpClient.GetAsync("RemotePlugins/File").Result;
                 response.EnsureSuccessStatusCode();
                 if (!response.Content.Headers.ContentType.ToString().Equals("application/zip"))
                 {
-                    logger.LogFatal("Failed to get file: Content-Type is not application/zip");
+                    Logger.LogFatal("Failed to get file: Content-Type is not application/zip");
                     return null;
                 }
                 // this is the file, store it in the download folder
                 byte[] fileBytes = response.Content.ReadAsByteArrayAsync().Result;
                 if (fileBytes == null || fileBytes.Length <= 100)
                 {
-                    logger.LogFatal("Failed to get file");
+                    Logger.LogFatal("Failed to get file");
                     return null;
                 }
                 string filePath = Path.GetFullPath(Path.Combine(downloadPath, RemotePluginsFilename));
@@ -141,10 +141,6 @@ namespace RemotePlugins
                     Directory.CreateDirectory(downloadPath);
                 }
 
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
 
                 File.WriteAllBytes(filePath, fileBytes);
                 return new PluginUpdateFile
@@ -156,7 +152,7 @@ namespace RemotePlugins
             }
             catch (Exception e)
             {
-                logger.LogFatal("Failed to get file: " + e.Message);
+                Logger.LogFatal("Failed to get file: " + e.Message);
                 return null;
             }
         }
@@ -174,7 +170,7 @@ namespace RemotePlugins
             }
             catch (Exception e)
             {
-                logger.LogFatal("Failed to get data from path [" + urlPath + "]: " + e.Message);
+                Logger.LogFatal("Failed to get data from path [" + urlPath + "]: " + e.Message);
             }
             return default;
         }

@@ -15,7 +15,7 @@ namespace RemotePlugins
         public string FilesHash { get; set; }
         public PluginFile Zip { get; set; }
 
-        
+
         public PluginFileMap CleanFileNames()
         {
             // prevent remote directory escape
