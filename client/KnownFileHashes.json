@@ -436,7 +436,9 @@
     "ReleaseVersions": [
       "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8854.18454",
       "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8853.41460",
-      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8853.28843"
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8853.28843",
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8869.3183",
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8867.33190"
     ]
   },
   "12a03419fe4649cc68713d8368cf6c1f33c649a160df9feb0a85e8a037600c89": {
@@ -515,6 +517,18 @@
     "Name": "StayInTarkov.dll",
     "ReleaseVersions": [
       "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-2023-11-20-15-25"
+    ]
+  },
+  "36beb131e99af8496ae5fe304a323e3e7cc47b8f764554ca3f6108f6fa4dd893": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8869.3183"
+    ]
+  },
+  "91ce3ba97d351d6666017b08e58c5e1f2075036bd8425d3c6944b93343c05ec4": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8867.33190"
     ]
   }
 }
