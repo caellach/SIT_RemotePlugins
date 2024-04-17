@@ -38,15 +38,15 @@ namespace RemotePlugins
             // get the base file path for our current directory
             string baseFilePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             string bepinexPath = Path.GetFullPath(Path.Combine(baseFilePath, "..")); // we assume that we are in /EFT/BepInEx/patchers/
-            // check the hashes of the files
             
+            // check the hashes of the files
             PluginFileChecker.CheckedFilesStatus checkedFilesStatus = CheckExistingFiles(config, pluginFileMap, bepinexPath);
             if (CheckAndLogFatal(checkedFilesStatus == null, "Failed to check files. Skipping", startTimeMs)) return;
 
             string remotePluginsPath = Path.GetFullPath(Path.Combine(bepinexPath, "remoteplugins"));
             DeleteEmptyDirectories(remotePluginsPath);
 
-            if (!ShouldUpdate(checkedFilesStatus, clientOptions, pluginFileMap, bepinexPath, startTimeMs))  return;
+            if (!ShouldUpdate(checkedFilesStatus, clientOptions, pluginFileMap, bepinexPath, startTimeMs)) return;
 
             Logger.LogInfo("Update needed. Processing...");
 
@@ -134,7 +134,7 @@ namespace RemotePlugins
                 string quarantinePath = Path.GetFullPath(Path.Combine(extractPath, "remoteplugins", "quarantine"));
                 Dictionary<string, string> quarantinedFiles = new Dictionary<string, string>();
 
-                Logger.LogInfo("Extracting known files" + 
+                Logger.LogInfo("Extracting known files" +
                     (config.UnknownFileHashAction == UnknownFileHashAction.Quarantine ? " and quarantining the rest"
                      : config.UnknownFileHashAction == UnknownFileHashAction.Warn ? " and unknown files"
                      : config.UnknownFileHashAction == UnknownFileHashAction.Delete ? " and deleting the rest"
@@ -161,12 +161,14 @@ namespace RemotePlugins
                             string zippedFileHash = requiresHashCheck ? GenerateHash(entryStream) : "";
 
                             string outputPath = string.Empty;
-                            if (!requiresHashCheck || PluginFileChecker.IsKnownGoodFileHash(zippedFileHash)) {
+                            if (!requiresHashCheck || PluginFileChecker.IsKnownGoodFileHash(zippedFileHash))
+                            {
                                 outputPath = Path.GetFullPath(Path.Combine(extractPath, entry.FullName));
                                 string quarantinedPath = Path.GetFullPath(Path.Combine(quarantinePath, entry.FullName));
                                 DeleteFileIfExists(quarantinedPath);
                             }
-                            else if (config.UnknownFileHashAction == UnknownFileHashAction.Quarantine) {
+                            else if (config.UnknownFileHashAction == UnknownFileHashAction.Quarantine)
+                            {
                                 outputPath = Path.GetFullPath(Path.Combine(quarantinePath, entry.FullName));
                                 quarantinedFiles.Add(entry.FullName, zippedFileHash);
                                 DeleteFileIfExists(outputPath);

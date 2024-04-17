@@ -363,12 +363,23 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         const files = this.getFilesRecursively(this.bepinexFilePath);
 
         for (const file of files) {
-            const data: Buffer = fs.readFileSync(`${file}`);
-            const sha256Hash = this.hashUtil.generateHashForData("sha256", data);
             const relativePath = file.replace(this.bepinexFilePath, "");
-            map.addFile(relativePath, sha256Hash, data.length);
-            if (writeFiles) {
-                zip.file(relativePath, data, { binary: true, createFolders: true, compression: "DEFLATE", compressionOptions: { level: 1 } }); // level 1 is fastest and in my testing the time/compression ratio doesn't get better with higher levels
+            if (fs.lstatSync(file).isDirectory()) {
+                const emptyFolderPath = `${relativePath}/`;
+                // this should be an empty directory, but we need those added to the file map as well
+                map.addFile(emptyFolderPath, "", 0);
+                // add to the zip as well
+                if (writeFiles) {
+                    zip.file(emptyFolderPath, "", { createFolders: true });
+                }
+            } else { // file
+                const data: Buffer = fs.readFileSync(`${file}`);
+                const sha256Hash = this.hashUtil.generateHashForData("sha256", data);
+
+                map.addFile(relativePath, sha256Hash, data.length);
+                if (writeFiles) {
+                    zip.file(relativePath, data, { binary: true, createFolders: true, compression: "DEFLATE", compressionOptions: { level: 1 } }); // level 1 is fastest and in my testing the time/compression ratio doesn't get better with higher levels
+                }
             }
         }
 
@@ -450,8 +461,14 @@ class RemotePlugins implements IPreAkiLoadMod, IPostAkiLoadMod, IPostDBLoadMod {
         }
         const dirs = this.vfs.getDirs(currentDirectory);
         for (const dir of dirs) {
-            files.push(...this.getFilesRecursively(`${currentDirectory}/${dir}`));
+            const subFiles = this.getFilesRecursively(`${currentDirectory}/${dir}`);
+            if (subFiles.length > 0) {
+                files.push(...subFiles);
+            } else {
+                files.push(`${currentDirectory}/${dir}`);
+            }
         }
+
         return files;
     }
 
