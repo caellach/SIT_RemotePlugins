@@ -54,6 +54,7 @@ namespace RemotePlugins
                 return;
             }
 
+            httpClient.Timeout = TimeSpan.FromSeconds(60 * 15); // 15 minutes, needed for downloading the plugin zip; calculated assuming 1mbps download speed
             httpClient.BaseAddress = new Uri(backendUrlObj.BackendUrl);
             string assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
             string assemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -149,6 +150,14 @@ namespace RemotePlugins
                     FilePath = filePath,
                     FileSize = fileBytes.Length
                 };
+            }
+            catch (AggregateException e)
+            {
+                for (int i = 0; i < e.InnerExceptions.Count; i++)
+                {
+                    Logger.LogFatal("Failed to get file: " + e.InnerExceptions[i].Message);
+                }
+                return null;
             }
             catch (Exception e)
             {
