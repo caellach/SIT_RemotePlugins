@@ -53,6 +53,7 @@ namespace RemotePlugins
         {
             if (File.Exists(filePath))
             {
+                Logger.LogInfo("Deleting file: " + filePath);
                 File.Delete(filePath);
             }
         }

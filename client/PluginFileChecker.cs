@@ -211,7 +211,10 @@ namespace RemotePlugins
                     containsSitDll = true;
                 }
                 string filePath = Path.GetFullPath(Path.Combine(bepinexPath, file.Name));
-                if (!File.Exists(filePath))
+
+                bool isDirectory = file.Name.EndsWith("/") && file.Hash.Equals("") && file.Size == 0;
+                
+                if ((isDirectory && !Directory.Exists(filePath)) || (!isDirectory && !File.Exists(filePath)))
                 {
                     string quarantineFilePath = Path.Combine(quarantinePath, file.Name);
                     if (config.KnownFileHashesOnly && config.UnknownFileHashAction == UnknownFileHashAction.Quarantine && File.Exists(quarantineFilePath) && Utilities.GenerateHash(quarantineFilePath) == file.Hash)
@@ -220,11 +223,17 @@ namespace RemotePlugins
                     }
                     else
                     {
-                        missingFiles.Add(file.Name);
+                        missingFiles.Add(file.Name + " " + isDirectory + " " + !Directory.Exists(filePath) + " ");
                     }
                 }
                 else
                 {
+                    if (isDirectory)
+                    {
+                        matchingFiles.Add(file.Name);
+                        return;
+                    }
+
                     // file exists
                     string fileHash = Utilities.GenerateHash(filePath);
                     if (fileHash != file.Hash)
@@ -238,11 +247,10 @@ namespace RemotePlugins
                             if (IsKnownGoodFileHash(fileHash))
                             {
                                 matchingFiles.Add(file.Name);
-                            }
-                            else if (config.AllowedFileHashes.Contains(fileHash))
-                            {
-                                matchingFiles.Add(file.Name);
-                                filesWhitelistedInConfig.Add(file.Name);
+                                if (config.AllowedFileHashes.Contains(fileHash))
+                                {
+                                    filesWhitelistedInConfig.Add(file.Name);
+                                }
                             }
                             else
                             {

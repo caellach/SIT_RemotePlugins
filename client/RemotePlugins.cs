@@ -116,7 +116,12 @@ namespace RemotePlugins
                     Logger.LogInfo("\t" + file);
                 }
             }
+
             Logger.LogInfo("Missing files: " + checkedFilesStatus.MissingFiles.Count);
+            foreach (string file in checkedFilesStatus.MissingFiles)
+            {
+                Logger.LogInfo("\t" + file);
+            }
 
             if (!checkedFilesStatus.ContainsSitDll)
             {
@@ -144,6 +149,10 @@ namespace RemotePlugins
                 {
                     foreach (ZipArchiveEntry entry in archive.Entries)
                     {
+                        if (ShouldSkipFile(entry.FullName))
+                        {
+                            continue;
+                        }
                         if (entry.FullName.EndsWith("/"))
                         {
                             // create the directory
@@ -278,6 +287,10 @@ namespace RemotePlugins
                     // delete only the files listed in the FileMap
                     foreach (PluginFileMap.PluginFile file in pluginFileMap.Files)
                     {
+                        if (ShouldSkipFile(file.Name))
+                        {
+                            continue;
+                        }
                         string filePath = Path.GetFullPath(Path.Combine(bepinexPath, file.Name));
                         DeleteFileIfExists(filePath);
                     }
@@ -289,6 +302,10 @@ namespace RemotePlugins
                     List<string> directories = new List<string>();
                     foreach (PluginFileMap.PluginFile file in pluginFileMap.Files)
                     {
+                        if (ShouldSkipFile(file.Name))
+                        {
+                            continue;
+                        }
                         string firstDirectory = file.Name.Split('/')[0];
                         if (!directories.Contains(firstDirectory))
                         {
@@ -305,6 +322,10 @@ namespace RemotePlugins
 
                 foreach (PluginFileMap.PluginFile file in pluginFileMap.Files)
                 {
+                    if (ShouldSkipFile(file.Name))
+                    {
+                        continue;
+                    }
                     string filePath = Path.GetFullPath(Path.Combine(bepinexPath, file.Name));
                     DeleteFileIfExists(filePath);
                 }
@@ -318,6 +339,16 @@ namespace RemotePlugins
                 PrintTimeTaken(startTimeMs);
                 return false;
             }
+        }
+
+        private static bool ShouldSkipFile(string filePath)
+        {
+            // we don't want to delete the whole config folder or the RemotePlugins.json config file
+            if (filePath.Equals("config/") || filePath.Equals("config/RemotePlugins.json"))
+            {
+                return true;
+            }
+            return false;
         }
 
         private static bool ShouldUpdate(PluginFileChecker.CheckedFilesStatus checkedFilesStatus, ClientOptions clientOptions, PluginFileMap pluginFileMap, string bepinexPath, int startTimeMs)
@@ -336,6 +367,10 @@ namespace RemotePlugins
                     List<string> directories = new List<string>();
                     foreach (PluginFileMap.PluginFile file in pluginFileMap.Files)
                     {
+                        if (ShouldSkipFile(file.Name))
+                        {
+                            continue;
+                        }
                         string firstDirectory = file.Name.Split('/')[0];
                         if (!directories.Contains(firstDirectory))
                         {
