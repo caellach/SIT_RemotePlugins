@@ -12,7 +12,8 @@
     "Name": "AmandsGraphics.dll",
     "ReleaseVersions": [
       "stayintarkov/SIT-Mod-Ports:2.4",
-      "stayintarkov/SIT-Mod-Ports:2.3"
+      "stayintarkov/SIT-Mod-Ports:2.3",
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
     ]
   },
   "14f27f11d97cc884cdf470406a1e93898dc26fa458e7c20b5127a3aefb0605ba": {
@@ -27,7 +28,8 @@
   "3537dc87e2f379615edc7967e117098765df854c339c0af6dc21d2912b0a2e72": {
     "Name": "AmandsSense.dll",
     "ReleaseVersions": [
-      "stayintarkov/SIT-Mod-Ports:2.4"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
     ]
   },
   "d754e18a86656ed7236ef3339578f0fd677e710a3b8b30c3ff009d0199eadfa7": {
@@ -36,7 +38,8 @@
       "stayintarkov/SIT-Mod-Ports:2.4",
       "stayintarkov/SIT-Mod-Ports:2.3",
       "stayintarkov/SIT-Mod-Ports:2.1",
-      "stayintarkov/SIT-Mod-Ports:2.0"
+      "stayintarkov/SIT-Mod-Ports:2.0",
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
     ]
   },
   "03a40a4af091226249c71a17f602c4e3c5ddcee8f37dde28448cf089c3822f92": {
@@ -116,7 +119,8 @@
   "cbc1b3e347b934dd03e8388a52527779a5daba6706a90cce9a93e978c91ae804": {
     "Name": "LootValue.dll",
     "ReleaseVersions": [
-      "stayintarkov/SIT-Mod-Ports:2.4"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
     ]
   },
   "e007365dbfc7997b3df775f2ebb38bdd78cca818e42fa6828bac10e044e97f7d": {
@@ -152,7 +156,8 @@
   "5bc15b74271dd8db88b11def7e43d7736c4597ad8ede6268166ab7b2c88e353f": {
     "Name": "skwizzy.LootingBots.dll",
     "ReleaseVersions": [
-      "stayintarkov/SIT-Mod-Ports:2.4"
+      "stayintarkov/SIT-Mod-Ports:2.4",
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
     ]
   },
   "c013dd20330ca6ba9f6478f34bf0fc427ee722beb23920da4f5cf94d2ef7d298": {
@@ -438,7 +443,8 @@
       "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8853.41460",
       "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8853.28843",
       "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8869.3183",
-      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8867.33190"
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8867.33190",
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8882.41069"
     ]
   },
   "12a03419fe4649cc68713d8368cf6c1f33c649a160df9feb0a85e8a037600c89": {
@@ -529,6 +535,192 @@
     "Name": "StayInTarkov.dll",
     "ReleaseVersions": [
       "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8867.33190"
+    ]
+  },
+  "ab6ba56dec2eab433b3295bcdc04d04b6b4497f7d06f1ba015a47da0b78609f5": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.10.8882.41069"
+    ]
+  },
+  "86a2b8df5af5f7cd61348f5b86e49c714030ccc04efe1483bc2f0895a65d5cb3": {
+    "Name": "DrakiaXYZ-BigBrain.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "7d842aebadae416df8d8277efcbd58f7caf5598aa30463dff73dc3a5b005237a": {
+    "Name": "DrakiaXYZ-BotDebug.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "c2be6767394394dce20044edaba142bfdd5787a32e67f9b8447003e32a564ed8": {
+    "Name": "CactusPie.FastSearch.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "975da91fe5ce532e1df3724ea88a24bffd24e7968256620e007d713338b32df2": {
+    "Name": "Tyrian-Radar.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "94c8eb188e4d463c58c5ee9243e5d416466da471b46964d7c6cfbd73efc3fcb6": {
+    "Name": "CWX_DebuggingTool.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "a9f6752a6d2c1e672d41a46a0faf89d2158bdcc0decaf03c8c537654cf997c8d": {
+    "Name": "Endurance.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "987442dc7af7c2b41b87e852108ac2ecea5cc0f1640d9b4c396b601cc5ef951f": {
+    "Name": "FOVFix.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "6bfa9e255cfa4a2786feb194f9adb69b8b2d9249d78147c9b4c9ab6aa0b89db1": {
+    "Name": "HealingAutoCancel.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "d65c8a1f06445149388cb512770f69ffa60554f57f5a0ed104d71d446b55b787": {
+    "Name": "InventoryOrganizingFeatures.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "2107a8195d3e03c1009e4598c255234c5e7977fc8e7319d773f2c59b6ee0a096": {
+    "Name": "MoreCheckmarks.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "56656a7a001f81b13689df2bd4f882b543a981c19cabbafac9f625a1756830f8": {
+    "Name": "SPTOpenSesame.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "2b75f0ed4a2a80681d7b9e912e39b50fd83efeb2c448dfd86d29cc05d56709e4": {
+    "Name": "dvize.PIRM.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "74bb472260ad41d8d28eb1dde556e38978d49f576eb9c60a36753529e8afe1c5": {
+    "Name": "DrakiaXYZ-Waypoints.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "94347ae311750def7ee48764d96758483157d1ffaf0155c0cd3c0b503281bb58": {
+    "Name": "SPTQuestingBots.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "8dee639dd726ac5d7ad4ddec00b2fc42989da399c49586d7ed71d54a730961cd": {
+    "Name": "QuickWeaponRackAccess.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "3d4cd470922092020ff27f9cfebf4e7fb0fdbe283a97cec1658d4ccb6878cd24": {
+    "Name": "RaiRai.HiddenCaches.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "e471e1d2b81b3eed85e38448594eac1541122ab01563b9e60327e3bfaff7f460": {
+    "Name": "CactusPie.RamCleanerInterval.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "86495065f89c61b81150e36d244a2778444aa62fed47dad34d0863efa86e5b7f": {
+    "Name": "RedDotTweaker.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "a9f378a5e5fde8fd8c7e023b18d91d37e03542b4bd812d3b4b5d2fc7a9e554c9": {
+    "Name": "SamSWAT.ReflexSightsRework.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "3c65907a3a5ed209ccc3618d6850baf1aa874a78ce3daf40bf81d6201299052c": {
+    "Name": "dvize.Donuts.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "5ba351169c99784cf4d6d9dd9bc6e28ec3380b2e620466b00dc34a7018a1b35c": {
+    "Name": "SAIN.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "6ebe18a94491f506ff8dd987a42c284f6fb54547820da244f47de61fd0ceb98e": {
+    "Name": "SamSWAT.TimeWeatherChanger.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "6eaaac2a77e12c96066e559c8f12d4e535005bbc67fc8c2a5338a139effa2615": {
+    "Name": "DrakiaXYZ-SearchOpenContainers.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "9b988912ad6276b6e75b662068350f1be4f7bcb78631c9917cc394475c1ef113": {
+    "Name": "StashSearch.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "9b257622497cd3bf9a9730ddbac664bbc62f59a5c64243a6cd987759e77fd397": {
+    "Name": "ThatsLit.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "b37dfa079279206c0c05762457f81ae1df3d4c39e665794db7b1217589c03017": {
+    "Name": "Kaeno-TraderScrolling.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "c6670a510f4421b96066e3b1b88eb3b7b49036ab2e1b20a9091dab4d991cfe34": {
+    "Name": "UseItemsFromAnywhere.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "d9573e27c80f02ea70da6359c4317ffa0501c0d4c2e4f32c514b4f0fb6e1e81d": {
+    "Name": "Gaylatea-UseLooseLoot.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "0de44fb5d3c8cc03cd2804fd43fe100b702dee4f888e39113576327bff8cdd23": {
+    "Name": "VCQLQuestZones.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
+    ]
+  },
+  "dae0afa9655553181153bfc7bf540de76fe2f9dcda5f7a2687c46adf09d3306a": {
+    "Name": "WTT-PackNStrap.dll",
+    "ReleaseVersions": [
+      "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
     ]
   }
 }

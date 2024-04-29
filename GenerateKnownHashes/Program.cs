@@ -6,7 +6,8 @@ namespace GenerateKnownHashes
     {
         private static List<string> repoList = new List<string> { 
             "stayintarkov/SIT-Mod-Ports",
-            "stayintarkov/StayInTarkov.Client"
+            "stayintarkov/StayInTarkov.Client",
+            "Stonewallx/Stone-SIT-Mod-List"
         };
 
         static void Main(string[] args)
