@@ -60,7 +60,11 @@ namespace RemotePlugins
             string assemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             string userAgent = "SITarkov-" + assemblyName + "-" + assemblyVersion;
             httpClient.DefaultRequestHeaders.Add("User-Agent", userAgent);
-            httpClient.DefaultRequestHeaders.Add("debug", "1"); // if we don't set this then bad requests are zlib'd
+            //if we don't set this then bad requests are zlib'd
+            httpClient.DefaultRequestHeaders.Add("debug", "1"); // <= 3.8.0
+            httpClient.DefaultRequestHeaders.Add("requestcompressed", "0"); // >= 3.8.1
+            httpClient.DefaultRequestHeaders.Add("responsecompressed", "0"); // >= 3.8.1
+
             
             // Send a request to the backend to see if we can connect
             try
