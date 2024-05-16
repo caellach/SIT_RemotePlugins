@@ -73,5 +73,11 @@ namespace RemotePlugins
             int endTimeMs = Environment.TickCount;
             Logger.LogInfo("Time taken: " + (endTimeMs - startTimeMs) + "ms");
         }
+
+        internal static string DecompressZlibString(byte[] responseBytes)
+        {
+            byte[] decompressedBytes = Elskom.Generic.Libs.MemoryZlib.Decompress(responseBytes);
+            return System.Text.Encoding.UTF8.GetString(decompressedBytes);
+        }
     }
 }

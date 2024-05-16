@@ -343,7 +343,7 @@ namespace RemotePlugins
         private static void LoadRemoteKnownGoodFileHashes()
         {
             return;
-            // INFO: This is disabled for now. Github uses TLS 1.3 which is not supported by Unity's Mono. Workarounds like setting
+            // INFO: This is disabled for now. Github uses TLS 1.3 which != supported by Unity's Mono. Workarounds like setting
             // ServicePointManager.SecurityProtocol do not work. Microsoft is also limiting official TLS 1.3 support to Windows 11, so we can't rely
             // on experimental features being enabled for other versions.
             // https://learn.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-

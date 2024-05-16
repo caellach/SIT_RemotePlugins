@@ -70,8 +70,12 @@ namespace RemotePlugins
 
                 HttpResponseMessage response = httpClient.SendAsync(request).Result;
                 response.EnsureSuccessStatusCode();
-                string responseBody = response.Content.ReadAsStringAsync().Result;
-
+                byte[] responseBytes = response.Content.ReadAsByteArrayAsync().Result;
+                
+                // compressed using zlib but they don't return the Content-Encoding header... oy
+                // decompress the response
+                string responseBody = Utilities.DecompressZlibString(responseBytes);
+                Logger.LogInfo("Backend responded: " + responseBody);
                 if (responseBody != "\"pong!\"")
                 {
                     Logger.LogFatal("Backend responded different than expected: " + responseBody);
