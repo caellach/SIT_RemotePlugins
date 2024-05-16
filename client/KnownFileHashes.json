@@ -722,5 +722,23 @@
     "ReleaseVersions": [
       "Stonewallx/Stone-SIT-Mod-List:1.10.8882.41069"
     ]
+  },
+  "66916cf75166f1f619caef7ec816f6a339ea8e2a44de7ea5a171bba4510a0d23": {
+    "Name": "Assembly-CSharp.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.11.8900.38830"
+    ]
+  },
+  "2508238393b7b04d36fb4e3bd1ce58c525e29f0937da2646dc0e9b7e4be578de": {
+    "Name": "SIT.WildSpawnType.PrePatcher.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.11.8900.38830"
+    ]
+  },
+  "81a3a2787e4127ffa6f004eaf98765a392add2e9997f4ee869de49677fc4d9ac": {
+    "Name": "StayInTarkov.dll",
+    "ReleaseVersions": [
+      "stayintarkov/StayInTarkov.Client:StayInTarkov.Client-1.11.8900.38830"
+    ]
   }
 }
